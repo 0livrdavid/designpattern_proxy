@@ -1,12 +1,13 @@
 {
-     "extends": "./tsconfig.json",
-     "compilerOptions": {
-       "module": "CommonJS",
-       "outDir": "./dist",
-       "rootDir": "./",
-       "noEmit": false
-     },
-     "include": ["server/**/*.ts"],
-     "exclude": ["node_modules"]
-   }
-   
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "noEmit": false,
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["express-serve-static-core"]
+  },
+  "include": ["server/**/*.ts"],
+  "exclude": ["node_modules"]
+}

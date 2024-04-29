@@ -15,7 +15,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         }
 
         if (typeof decoded === 'object' && decoded !== null) {
-            req.user = decoded as { [key: string]: any };
+            (req as any).user = decoded as { [key: string]: any };
             next();
         } else {
             return res.status(401).json({ error: 'Token inválido' });
