@@ -5,9 +5,11 @@
     "outDir": "./dist",
     "rootDir": "./",
     "noEmit": false,
+    "esModuleInterop": true,
+    "strict": true,
     "typeRoots": ["./node_modules/@types", "./types"],
-    "types": ["express-serve-static-core"]
+    "types": ["express-serve-static-core", "express"]
   },
-  "include": ["server/**/*.ts"],
+  "include": ["server/**/*", "types/**/*"],
   "exclude": ["node_modules"]
 }
