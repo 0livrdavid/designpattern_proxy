@@ -1,37 +1,37 @@
 "use client"; 
 
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { API_BASE_URL } from './server_config';
 
+
 export default function Home() {
     const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+    const [password_hash, setPassword_hash] = useState<string>(''); 
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
     const router = useRouter();
 
      const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-          event.preventDefault();
+          event.preventDefault();  
           setLoading(true);
           setError('');
 
           try {
-               const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+               const response = await fetch(`${API_BASE_URL}session`, { 
                     method: 'POST',
                     headers: {
-                         'Content-Type': 'application/json',
+                         'Content-Type': 'application/json', 
                     },
-                    body: JSON.stringify({ email: email, password: password }),
-               });
+                    body: JSON.stringify({ email: email, password_hash: password_hash }), 
+               }); 
                const data = await response.json();
-               console.log(data);
                if (response.ok) {
-                    console.log('Login successful:', data);
-                    localStorage.setItem('token', data.token); // Armazenar o token JWT no localStorage
+                    localStorage.setItem("token", data.token)
+                    localStorage.setItem("session", JSON.stringify(data.session))
                     router.push('/dashboard');
-               } else {
-                    throw new Error(data.error || 'Erro ao fazer login');
+               } else { 
+                    throw new Error(data?.message);
                }
           } catch (err) {
                if (err instanceof Error) {
@@ -90,8 +90,8 @@ export default function Home() {
                                         type="password"
                                         autoComplete="current-password"
                                         required
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        value={password_hash}
+                                        onChange={(e) => setPassword_hash(e.target.value)}
                                         className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                    />
                               </div>
@@ -114,7 +114,7 @@ export default function Home() {
                               Crie sua conta
                          </a>
                          </p>
-                    </div>
+                    </div> 
                </div>
           </>
      );

@@ -1,18 +1,30 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  db:
-    image: postgres:latest
+  dcs-postgres:
+    image: postgres:15.3-alpine
+    container_name: dcs-postgres
     restart: always
-    container_name: postgres_container
-    ports:
-      - "5432:5432"
     environment:
-      POSTGRES_USER: username_postgresql
-      POSTGRES_PASSWORD: password_postgresql
-      POSTGRES_DB: database_postgresql
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    ports:
+      - 5432:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./data/postgres:/var/lib/postgresql/data
+  dcs-pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: dcs-pgadmin
+    restart: always
+    depends_on:
+      - dcs-postgres 
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@root.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - 8080:80
 
-volumes:
-  postgres_data:
+networks:
+  default:
+    name: local-network
+    external: false
