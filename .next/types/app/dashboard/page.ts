@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // File: /Users/davidoliveira/Downloads/designpattern_proxy/src/app/dashboard/page.tsx
+=======
+// File: /Users/davidoliveira/Documents/Next/designpattern_proxy/src/app/dashboard/page.tsx
+>>>>>>> 4dfb25ee4b130bc27ee6b3658e7b45a999755046
 import * as entry from '../../../../src/app/dashboard/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
