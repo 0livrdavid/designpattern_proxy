@@ -2,8 +2,8 @@ import { ReactNode } from "react"
 import './globals.css'
 
 export const metadata = {
-     title: 'Synodos',
-     description: 'Synodos',
+     title: 'Design Pattern Proxy',
+     description: 'Design Pattern Proxy',
 }
 
 export default function RootLayout({

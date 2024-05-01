@@ -1,7 +1,7 @@
 export default function Head() {
      return (
           <>
-               <title>Synodos</title>
+               <title>Design Pattern Proxy</title>
           </>
      )
 }
